@@ -102,6 +102,12 @@
       "metadata": {
         "description": "The property 'osProfile/secrets', specify the set of certificates that shall be installed on the VM"
       }
+    },
+    "diagnosticsStorageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the storage account to which boot diagnostics for the VM will be stored"
+      }
     }
   },
   "variables": {
@@ -172,6 +178,12 @@
               "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('nicName'))]"
             }
           ]
+        },
+        "diagnosticsProfile": {
+            "bootDiagnostics": {
+                "enabled": true,
+                "storageUri": "[concat('https://', parameters('diagnosticsStorageAccountName'), '.blob.core.windows.net/')]"
+            }
         }
       },
       "resources": [

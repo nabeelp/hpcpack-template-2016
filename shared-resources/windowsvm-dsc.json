@@ -137,6 +137,12 @@
       "metadata": {
         "description": "A resource id reference to the NSG to which the NIC for this VM should be attached"
       }
+    },
+    "diagnosticsStorageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the storage account to which boot diagnostics for the VM will be stored"
+      }
     }
   },
   "variables": {
@@ -238,6 +244,12 @@
               "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
             }
           ]
+        },
+        "diagnosticsProfile": {
+            "bootDiagnostics": {
+                "enabled": true,
+                "storageUri": "[concat('https://', parameters('diagnosticsStorageAccountName'), '.blob.core.windows.net/')]"
+            }
         }
       },
       "resources": [
