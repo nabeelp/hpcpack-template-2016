@@ -131,6 +131,12 @@
       "metadata": {
         "description": "The DSC protected settings"
       }
+    },
+    "nsgReference": {
+      "type": "string",
+      "metadata": {
+        "description": "A resource id reference to the NSG to which the NIC for this VM should be attached"
+      }
     }
   },
   "variables": {
@@ -183,6 +189,9 @@
             }
           }
         ],
+        "networkSecurityGroup": {
+          "id": "[parameters('nsgReference')]"
+        },
         "dnsSettings": "[if(empty(parameters('dnsServers')), json('null'), variables('dnsSettings'))]",
         "enableAcceleratedNetworking": "[parameters('enableAcceleratedNetworking')]"
       }
